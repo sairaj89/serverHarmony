@@ -6,7 +6,18 @@ const axios = require('axios');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+// Replace 'your-netlify-domain.netlify.app' with your actual Netlify domain
+const allowedDomains = ['https://harmonyc.netlify.app'];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedDomains.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
 
 const COLORMIND_API_URL = 'http://colormind.io/api/';
 const MAX_ATTEMPTS = 7;

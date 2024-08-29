@@ -2,9 +2,9 @@
   "name": "colormind-proxy",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+ "scripts": {
+  "start": "node server.js"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -15,4 +15,6 @@
     "express": "^4.19.2",
     "tinycolor2": "^1.6.0"
   }
+
 }
+

@@ -6,7 +6,6 @@ const axios = require('axios');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Replace 'your-netlify-domain.netlify.app' with your actual Netlify domain
 const allowedDomains = ['https://harmonyc.netlify.app'];
 
 app.use(cors({
@@ -116,3 +115,8 @@ app.get('/api/colors', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+
+// "scripts": {
+//   "test": "echo \"Error: no test specified\" && exit 1"
+// },

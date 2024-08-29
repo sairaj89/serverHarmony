@@ -76,7 +76,6 @@ const fetchColorsWithRetry = async (attempts = MAX_ATTEMPTS) => {
     const lighterColors = getLighterColors(colors);
 
     if (lighterColors.length >= 3 && !hasDuplicateColors([mainColor, lighterColors[0], lighterColors[1], lighterColors[2]])) {
-      // For 3 colors logic
       return {
         mainColor: mainColor,
         secondaryColor: lighterColors[0],
@@ -84,14 +83,12 @@ const fetchColorsWithRetry = async (attempts = MAX_ATTEMPTS) => {
         accentColor2: lighterColors[2],
       };
     } else if (lighterColors.length >= 2 && !hasDuplicateColors([mainColor, lighterColors[0], lighterColors[1]])) {
-      // For 2 colors logic
       return {
         mainColor: mainColor,
         secondaryColor: lighterColors[0],
         accentColor1: lighterColors[1],
       };
     } else if (lighterColors.length >= 1 && !hasDuplicateColors([mainColor, lighterColors[0]])) {
-      // For 1 color logic
       return {
         mainColor: mainColor,
         secondaryColor: lighterColors[0],
@@ -101,6 +98,17 @@ const fetchColorsWithRetry = async (attempts = MAX_ATTEMPTS) => {
 
   throw new Error('Not enough unique and lighter colors fetched from Colormind API.');
 };
+
+// Root route for fetching colors
+app.get('/', async (req, res) => {
+  try {
+    const colorPalette = await fetchColorsWithRetry();
+    res.json(colorPalette);
+  } catch (error) {
+    console.error('Error fetching colors from Colormind API:', error);
+    res.status(500).send('Error fetching colors');
+  }
+});
 
 app.get('/api/colors', async (req, res) => {
   try {
@@ -115,6 +123,7 @@ app.get('/api/colors', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
 
 
 // "scripts": {

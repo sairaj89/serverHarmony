@@ -99,17 +99,6 @@ const fetchColorsWithRetry = async (attempts = MAX_ATTEMPTS) => {
   throw new Error('Not enough unique and lighter colors fetched from Colormind API.');
 };
 
-// Root route for fetching colors
-app.get('/', async (req, res) => {
-  try {
-    const colorPalette = await fetchColorsWithRetry();
-    res.json(colorPalette);
-  } catch (error) {
-    console.error('Error fetching colors from Colormind API:', error);
-    res.status(500).send('Error fetching colors');
-  }
-});
-
 app.get('/api/colors', async (req, res) => {
   try {
     const colorPalette = await fetchColorsWithRetry();
@@ -123,9 +112,3 @@ app.get('/api/colors', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
-
-
-// "scripts": {
-//   "test": "echo \"Error: no test specified\" && exit 1"
-// },

@@ -6,7 +6,7 @@ const axios = require('axios');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const allowedDomains = ['https://harmonyc.netlify.app'];
+const allowedDomains = ['https://harmonyc.netlify.app', 'https://main--harmonyc.netlify.app'];
 
 app.use(cors({
   origin: function (origin, callback) {
